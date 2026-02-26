@@ -1,5 +1,7 @@
 # Koota API
 
+[![Node.js CI](https://github.com/iinsys/koota/actions/workflows/ci.yml/badge.svg)](https://github.com/iinsys/koota/actions/workflows/ci.yml)
+
 This is the backend API for the Koota application, a tool to track contributions in a group.
 
 ## Features
