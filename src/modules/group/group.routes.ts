@@ -49,6 +49,51 @@ router.post(
 
 /**
  * @swagger
+ * /groups/{groupId}:
+ *   put:
+ *     summary: Update a group
+ *     parameters:
+ *       - in: path
+ *         name: groupId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Group'
+ *     responses:
+ *       200:
+ *         description: Updated
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Group'
+ */
+router.put("/groups/:groupId", createGroupValidation, validate, groupController.updateGroup);
+
+/**
+ * @swagger
+ * /groups/{groupId}:
+ *   delete:
+ *     summary: Delete a group
+ *     parameters:
+ *       - in: path
+ *         name: groupId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Deleted
+ */
+router.delete("/groups/:groupId", groupController.deleteGroup);
+
+
+/**
+ * @swagger
  * /groups/{groupId}/defaulters:
  *   get:
  *     summary: Get a list of defaulters for a group

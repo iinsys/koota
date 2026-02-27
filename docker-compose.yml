@@ -8,8 +8,6 @@ services:
     environment:
       - MONGO_URI=mongodb://mongo:27017/koota
       - PORT=5000
-    volumes:
-      - .:/app
   mongo:
     image: mongo
     ports:
