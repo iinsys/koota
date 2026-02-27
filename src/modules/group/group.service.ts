@@ -56,3 +56,27 @@ export const getGroupStats = async (groupId: string) => {
     nextMemberToReceive,
   };
 };
+
+export const updateGroup = async (
+  groupId: string,
+  groupData: Partial<IGroup>
+) => {
+  const group = await Group.findByIdAndUpdate(groupId, groupData, {
+    new: true,
+  });
+  if (!group) {
+    throw new Error("Group not found");
+  }
+  return group;
+};
+
+export const deleteGroup = async (groupId: string) => {
+  const group = await Group.findByIdAndDelete(groupId);
+  if (!group) {
+    throw new Error("Group not found");
+  }
+  // Also delete all members, contributions, and payouts associated with the group
+  await Member.deleteMany({ groupId: new mongoose.Types.ObjectId(groupId) as any });
+  await Contribution.deleteMany({ groupId: new mongoose.Types.ObjectId(groupId) as any });
+  return group;
+};

@@ -44,3 +44,29 @@ export const getGroupStats = async (req: Request, res: Response) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const updateGroup = async (req: Request, res: Response) => {
+  try {
+    const { groupId } = req.params;
+    if (typeof groupId !== "string") {
+      return res.status(400).json({ message: "Invalid groupId" });
+    }
+    const group = await groupService.updateGroup(groupId, req.body);
+    res.status(200).json(group);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const deleteGroup = async (req: Request, res: Response) => {
+  try {
+    const { groupId } = req.params;
+    if (typeof groupId !== "string") {
+      return res.status(400).json({ message: "Invalid groupId" });
+    }
+    const group = await groupService.deleteGroup(groupId);
+    res.status(200).json(group);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};
